@@ -5,7 +5,7 @@ import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 /** Toutes les heures sont affichées dans le fuseau du commerce, quel que soit le navigateur. */
 export const BUSINESS_TZ = "America/Toronto";
 export const BOOKING_HORIZON_DAYS = 60;
-export const CANCEL_LIMIT_HOURS = Number(process.env.NEXT_PUBLIC_CANCEL_LIMIT_HOURS ?? 24);
+export const CANCEL_LIMIT_HOURS = Number(process.env.NEXT_PUBLIC_CANCEL_LIMIT_HOURS || 24);
 
 export const WEEKDAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
