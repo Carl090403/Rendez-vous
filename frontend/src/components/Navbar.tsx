@@ -7,8 +7,7 @@ import { useState } from "react";
 
 import { useToast } from "@/components/ui/Toast";
 import { useAuth } from "@/lib/auth";
-
-export const BUSINESS_NAME = process.env.NEXT_PUBLIC_BUSINESS_NAME || "Rendez-vous";
+import { BUSINESS_NAME } from "@/lib/config";
 
 type NavLink = { href: string; label: string };
 

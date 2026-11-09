@@ -3,7 +3,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { Footer } from "@/components/Footer";
-import { BUSINESS_NAME, Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/Navbar";
+import { BUSINESS_NAME } from "@/lib/config";
 
 import "./globals.css";
 import { Providers } from "./providers";

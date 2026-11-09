@@ -1,4 +1,4 @@
-import { BUSINESS_NAME } from "./Navbar";
+import { BUSINESS_NAME } from "@/lib/config";
 
 export function Footer() {
   return (
