@@ -69,18 +69,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cp .env.example .env
-      - run: docker compose up -d --build --wait backend
-      - run: docker compose up -d frontend
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+      # Avant docker compose : le conteneur frontend monte un volume sur node_modules,
+      # et Docker crée sinon ce dossier en root sur le runner (npm ci échoue alors).
       - run: npm ci
         working-directory: frontend
       - run: npx playwright install --with-deps chromium
         working-directory: frontend
+      - run: cp .env.example .env
+      - run: docker compose up -d --build --wait backend
+      - run: docker compose up -d frontend
       - name: Attendre le frontend
         run: for i in $(seq 1 60); do curl -sf http://localhost:3000 > /dev/null && exit 0; sleep 2; done; exit 1
       - run: npm run e2e
