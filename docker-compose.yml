@@ -1,0 +1,62 @@
+# Environnement de développement complet : docker compose up
+#   Frontend  http://localhost:3000
+#   API       http://localhost:8000/docs
+#   Mailpit   http://localhost:8025 (courriels envoyés)
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: rdv
+      POSTGRES_PASSWORD: rdv
+      POSTGRES_DB: rdv
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rdv"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      args:
+        INSTALL_DEV: "true"
+    env_file: .env
+    environment:
+      # Dans Docker, la base et Mailpit sont joints par leur nom de service.
+      DATABASE_URL: postgresql+psycopg://rdv:rdv@db:5432/rdv
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+      WATCHFILES_FORCE_POLLING: "true"
+      COVERAGE_FILE: /tmp/.coverage
+    depends_on:
+      db:
+        condition: service_healthy
+    ports: ["8000:8000"]
+    volumes: ["./backend:/app"]
+    # Migrations + données de départ (idempotent), puis l'API avec rechargement à chaud.
+    command: >-
+      sh -c "alembic upgrade head && python scripts/seed.py &&
+      uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      retries: 20
+
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    env_file: .env
+    environment:
+      WATCHPACK_POLLING: "true"
+    depends_on: [backend]
+    ports: ["3000:3000"]
+    volumes: ["./frontend:/app", "/app/node_modules", "/app/.next"]
+
+  mailpit:
+    image: axllent/mailpit
+    ports: ["8025:8025", "1025:1025"]
+
+volumes:
+  pgdata:

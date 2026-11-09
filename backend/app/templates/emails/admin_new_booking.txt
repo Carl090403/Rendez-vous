@@ -1,0 +1,5 @@
+Nouvelle réservation de {{ b.client_name }} ({{ b.client_email }}).
+
+{% include "_details.txt" %}
+
+Tableau de bord : {{ app_url }}/admin/reservations

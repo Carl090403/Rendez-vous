@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Nouvelle réservation de <strong>{{ b.client_name }}</strong> ({{ b.client_email }}).</p>
+{% include "_details.html" %}
+<p><a href="{{ app_url }}/admin/reservations" style="display:inline-block;padding:10px 18px;background:#171717;color:#ffffff;border-radius:8px;text-decoration:none;">Ouvrir le tableau de bord</a></p>
+{% endblock %}

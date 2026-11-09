@@ -1,0 +1,6 @@
+Service : {{ b.service_name }}
+Date : {{ b.when }}
+Prix : {{ b.price }}
+{% if business_address %}
+Adresse : {{ business_address }}
+{% endif %}

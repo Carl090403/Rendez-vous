@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Bonjour {{ b.client_name }},</p>
+<p>Votre rendez-vous est <strong>confirmé</strong>.</p>
+{% include "_details.html" %}
+<p>Vous pouvez annuler jusqu'à 24 h avant le début du rendez-vous.</p>
+<p><a href="{{ app_url }}/mes-rendez-vous" style="display:inline-block;padding:10px 18px;background:#171717;color:#ffffff;border-radius:8px;text-decoration:none;">Voir ou annuler mon rendez-vous</a></p>
+{% endblock %}

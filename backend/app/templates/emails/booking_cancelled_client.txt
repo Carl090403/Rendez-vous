@@ -1,0 +1,9 @@
+Bonjour {{ b.client_name }},
+
+Votre annulation est bien enregistrée. Le rendez-vous suivant est annulé :
+
+{% include "_details.txt" %}
+
+Réserver un autre créneau : {{ app_url }}/reserver
+
+{{ business_name }}

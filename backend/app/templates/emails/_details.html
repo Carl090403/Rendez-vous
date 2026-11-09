@@ -1,0 +1,10 @@
+<table role="presentation" style="width:100%;margin:16px 0;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;">
+  <tr><td style="padding:14px 16px;font-size:14px;">
+    <strong>Service :</strong> {{ b.service_name }}<br>
+    <strong>Date :</strong> {{ b.when }}<br>
+    <strong>Prix :</strong> {{ b.price }}
+{% if business_address %}
+    <br><strong>Adresse :</strong> {{ business_address }}
+{% endif %}
+  </td></tr>
+</table>

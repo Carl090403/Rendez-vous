@@ -1,0 +1,10 @@
+Bonjour {{ b.client_name }},
+
+Votre rendez-vous est confirmé.
+
+{% include "_details.txt" %}
+
+Vous pouvez annuler jusqu'à 24 h avant le début du rendez-vous :
+{{ app_url }}/mes-rendez-vous
+
+{{ business_name }}

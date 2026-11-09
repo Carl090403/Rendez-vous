@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Bonjour {{ b.client_name }},</p>
+<p>Votre annulation est bien enregistrée. Le rendez-vous suivant est annulé :</p>
+{% include "_details.html" %}
+<p><a href="{{ app_url }}/reserver" style="color:#171717;">Réserver un autre créneau</a></p>
+{% endblock %}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#0f172a"/>
+  <!-- Calendar Body -->
+  <rect x="96" y="144" width="320" height="272" rx="28" fill="#ffffff"/>
+  <!-- Calendar Header -->
+  <path d="M 96 172 C 96 156.5 108.5 144 124 144 L 388 144 C 403.5 144 416 156.5 416 172 L 416 208 L 96 208 Z" fill="#10b981"/>
+  <!-- Calendar Rings -->
+  <rect x="160" y="104" width="28" height="64" rx="14" fill="#0f172a" stroke="#ffffff" stroke-width="6"/>
+  <rect x="324" y="104" width="28" height="64" rx="14" fill="#0f172a" stroke="#ffffff" stroke-width="6"/>
+  <!-- Calendar Grid Marks -->
+  <circle cx="168" cy="264" r="14" fill="#0f172a"/>
+  <circle cx="256" cy="264" r="14" fill="#0f172a"/>
+  <circle cx="344" cy="264" r="14" fill="#0f172a"/>
+  <circle cx="168" cy="336" r="14" fill="#0f172a"/>
+  <circle cx="256" cy="336" r="14" fill="#10b981"/>
+  <circle cx="344" cy="336" r="14" fill="#cbd5e1"/>
+</svg>

@@ -1,0 +1,12 @@
+Bonjour {{ b.client_name }},
+
+Nous sommes désolés : le commerce a dû annuler votre rendez-vous.
+
+{% include "_details.txt" %}
+{% if b.cancel_reason %}
+Motif : {{ b.cancel_reason }}
+{% endif %}
+
+Choisir un nouveau créneau : {{ app_url }}/reserver
+
+{{ business_name }}

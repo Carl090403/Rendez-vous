@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-900);
+  }
+
+  /* La fenêtre modale native <dialog> reste centrée et défilable sur petit écran. */
+  dialog[open] {
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+  }
+}
