@@ -22,5 +22,6 @@ RUN useradd --create-home appuser
 USER appuser
 
 EXPOSE 8000
-# En production (Render, Fly.io) : migrations puis serveur. $PORT est fourni par l'hébergeur.
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*'"]
+# En production (Render, Fly.io) : migrations, données de départ (idempotent, seulement si
+# ADMIN_PASSWORD est défini), puis le serveur. $PORT est fourni par l'hébergeur.
+CMD ["sh", "-c", "alembic upgrade head && if [ -n \"$ADMIN_PASSWORD\" ]; then python scripts/seed.py; fi && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*'"]

@@ -4,7 +4,7 @@ from functools import cached_property
 from typing import Literal
 from zoneinfo import ZoneInfo
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -51,6 +51,15 @@ class Settings(BaseSettings):
     smtp_host: str = "localhost"
     smtp_port: int = 1025
     resend_api_key: str = ""
+
+    @field_validator("database_url")
+    @classmethod
+    def _use_psycopg_driver(cls, url: str) -> str:
+        """Render, Neon ou Heroku fournissent postgres:// ou postgresql:// : on force psycopg 3."""
+        for prefix in ("postgres://", "postgresql://"):
+            if url.startswith(prefix):
+                return "postgresql+psycopg://" + url.removeprefix(prefix)
+        return url
 
     @cached_property
     def tz(self) -> ZoneInfo:

@@ -11,6 +11,21 @@ from app.models import BusinessHour, Service, User
 from app.services.email import format_local_datetime, format_price, mask_email
 
 
+@pytest.mark.parametrize(
+    "url",
+    [
+        "postgres://u:p@host:5432/db",
+        "postgresql://u:p@host:5432/db",
+        "postgresql+psycopg://u:p@host:5432/db",
+    ],
+)
+def test_database_url_from_hosting_providers_uses_psycopg(url: str) -> None:
+    from app.config import Settings
+
+    settings = Settings(database_url=url, jwt_secret="x" * 32)
+    assert settings.database_url == "postgresql+psycopg://u:p@host:5432/db"
+
+
 def test_health_checks_database(client: TestClient) -> None:
     res = client.get("/health")
     assert res.status_code == 200 and res.json() == {"status": "ok"}

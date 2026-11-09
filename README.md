@@ -93,7 +93,7 @@ Sans Docker : `cd backend && pip install -e ".[dev]" && pytest` (avec `DATABASE_
 ## Déploiement
 
 1. **Base** : PostgreSQL géré (Render, Neon ou Supabase) avec sauvegardes automatiques.
-2. **API** : Render ou Fly.io depuis `backend/Dockerfile` (la commande de démarrage applique les migrations). Variables : celles de `.env.example`, avec un `JWT_SECRET` aléatoire, `COOKIE_SECURE=true`, `FRONTEND_ORIGIN=<url du frontend>`, `RESEND_API_KEY`, `ADMIN_PASSWORD` fort. Puis une seule fois : `python scripts/seed.py`.
+2. **API** : Render ou Fly.io depuis `backend/Dockerfile`. Au démarrage, le conteneur applique les migrations puis crée l'administrateur et les données de départ si `ADMIN_PASSWORD` est défini (sans doublon). Variables : celles de `.env.example`, avec un `JWT_SECRET` aléatoire, `COOKIE_SECURE=true`, `FRONTEND_ORIGIN=<url du frontend>`, `RESEND_API_KEY`, `ADMIN_PASSWORD` fort. Les URL `postgres://` ou `postgresql://` fournies par l'hébergeur sont acceptées telles quelles.
 3. **Frontend** : Vercel, dossier `frontend/`, avec `NEXT_PUBLIC_API_URL`. Si le frontend et l'API sont sur des domaines différents, préférez `API_PROXY_TARGET=<url de l'API>` et `NEXT_PUBLIC_API_URL=/api/v1` : le cookie devient « first-party » (Safari bloque les cookies tiers).
 4. **Courriels** : domaine vérifié chez Resend (SPF, DKIM).
 5. **Surveillance** : `GET /health` (teste la base) branché sur UptimeRobot.
