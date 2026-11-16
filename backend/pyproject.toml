@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "API FastAPI de la plateforme de réservation Rendez-vous (MVP)"
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi==0.162.2",
+    "fastapi==0.162.6",
     "uvicorn[standard]==0.54.0",
     "pydantic[email]==2.14.3",
     "pydantic-settings==2.16.2",
