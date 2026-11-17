@@ -110,6 +110,4 @@ Sans Docker : `cd backend && pip install -e ".[dev]" && pytest` (avec `DATABASE_
 - **v1.1** : rappels 24 h avant (Celery + Redis), paiement Stripe en mode test et factures PDF, prédiction d'achalandage (scikit-learn), assistant de questions-réponses (RAG avec pgvector), bot Discord ou Slack, statistiques.
 - **v2** : plusieurs commerces, plusieurs employés, réservations récurrentes, synchronisation Google Calendar, application mobile.
 
-## Ce que j'ai appris
 
-_À compléter à partir du journal de bord._
